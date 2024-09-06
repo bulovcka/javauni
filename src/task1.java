@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class Main{
+public class task1 {
     public static void main(String[] args){
         System.out.println("Enter array numbers");
         Scanner sc = new Scanner(System.in);

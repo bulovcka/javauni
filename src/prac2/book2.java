@@ -1,10 +1,12 @@
+package prac2;
+
 import java.util.Scanner;
 import java.util.Arrays;
 
 public class book2 {
     @Override
     public String toString() {
-        return "book2{" +
+        return "prac2.book2{" +
                 "title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", date=" + date +

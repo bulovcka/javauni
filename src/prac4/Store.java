@@ -59,12 +59,16 @@ class Cart{
            total += product.getPrice();
        }
        System.out.println("Total: " + total);
+       products.clear();
    }
    public void viewCart(){
-       for (Products product : products){
-           System.out.println(product + " - $" + product.getPrice());
+       if (products.isEmpty()){
+           System.out.println("Cart is Empty");
+       }else {
+           for (Products product : products) {
+               System.out.println(product + " - $" + product.getPrice());
+           }
        }
-       products.clear();
    }
 
 }
@@ -73,6 +77,7 @@ public class Store {
     private final Scanner sc = new Scanner(System.in);
     private final Cart cart = new Cart();
     private final User user = new User("User", "password");
+
 
     public void start(){
         if(!authenticateUser()) {

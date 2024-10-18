@@ -1,15 +1,12 @@
-package graphic_shop;
+package prac5;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 class OnlineShopGUI {
 
     // Пользовательские данные
-    private User user = new User("user", "password");
+    private User user = new User("erlan_c00l@mail.ru", "erlakrut228");
     private Cart cart = new Cart();
     private JFrame frame;
 
@@ -17,7 +14,6 @@ class OnlineShopGUI {
         SwingUtilities.invokeLater(() -> new OnlineShopGUI().showLoginScreen());
     }
 
-    // Окно аутентификации
     private void showLoginScreen() {
         frame = new JFrame("Вход в интернет-магазин");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,13 +41,12 @@ class OnlineShopGUI {
         frame.add(fieldLogin);
         frame.add(labelPassword);
         frame.add(fieldPassword);
-        frame.add(new JLabel());  // пустая ячейка для расположения кнопки
+        frame.add(new JLabel());
         frame.add(loginButton);
 
         frame.setVisible(true);
     }
 
-    // Главное меню интернет-магазина
     private void showMainMenu() {
         frame.getContentPane().removeAll();
         frame.setLayout(new GridLayout(3, 1));
@@ -71,7 +66,6 @@ class OnlineShopGUI {
         frame.repaint();
     }
 
-    // Окно категорий товаров
     private void showCategories() {
         frame.getContentPane().removeAll();
         frame.setLayout(new GridLayout(Category.values().length + 1, 1));
@@ -93,7 +87,6 @@ class OnlineShopGUI {
         frame.repaint();
     }
 
-    // Окно товаров в выбранной категории
     private void showProducts(Category category) {
         frame.getContentPane().removeAll();
         frame.setLayout(new GridLayout(Product.values().length + 1, 1));
@@ -120,7 +113,6 @@ class OnlineShopGUI {
         frame.repaint();
     }
 
-    // Окно корзины
     private void showCart() {
         frame.getContentPane().removeAll();
         frame.setLayout(new GridLayout(cart.getProducts().size() + 2, 1));
@@ -149,44 +141,11 @@ class OnlineShopGUI {
         frame.repaint();
     }
 
-    // Класс для корзины
-    class Cart {
-        private ArrayList<Product> products = new ArrayList<>();
 
-        public void addProduct(Product product) {
-            products.add(product);
-        }
-
-        public ArrayList<Product> getProducts() {
-            return products;
-        }
-
-        public void checkout() {
-            products.clear();
-        }
-    }
-
-    // Класс пользователя для аутентификации
-    class User {
-        private String login;
-        private String password;
-
-        public User(String login, String password) {
-            this.login = login;
-            this.password = password;
-        }
-
-        public boolean authenticate(String login, String password) {
-            return this.login.equals(login) && this.password.equals(password);
-        }
-    }
-
-    // Перечисление категорий
     enum Category {
         ELECTRONICS, CLOTHING, BOOKS
     }
 
-    // Перечисление товаров
     enum Product {
         LAPTOP(Category.ELECTRONICS, 1000),
         PHONE(Category.ELECTRONICS, 500),

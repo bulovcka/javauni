@@ -1,5 +1,4 @@
 package prac8_1;
-import java.util.ArrayList;
 public class Triag {
     public static void recursion(int n, int currentNumber, int count){
         if (n == 0){

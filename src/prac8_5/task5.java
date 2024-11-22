@@ -1,5 +1,5 @@
 package prac8_5;
-
+//
 public class task5 {
     public static void recursion(int n){
         if (n == 0){
@@ -11,6 +11,6 @@ public class task5 {
     }
 
     public static void main(String[] args){
-        recursion(150);
+        recursion(100);
     }
 }

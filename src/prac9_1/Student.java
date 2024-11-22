@@ -23,13 +23,20 @@ public class Student implements Comparable<Student> { ;
     }
 
     public static void gnomeSort(Student[] students){
-        for (int i = 0; i < students.length - 1; i++) {
-            for (int j = i + 1; j < students.length; j++) {
-                if (students[i].compareTo(students[j]) > 0) {
-                    Student temp = students[i];
-                    students[i] = students[j];
-                    students[j] = temp;
-                }
+        int index = 0;
+        while (index < students.length) {
+            if (index == 0){
+                index ++;
+
+            }
+
+            if (students[index].compareTo(students[index - 1]) < 0) {
+                Student temp = students[index];
+                students[index] = students[index - 1];
+                students[index - 1] = temp;
+                index--;
+            } else{
+              index++;
             }
         }
     }
@@ -49,7 +56,7 @@ public class Student implements Comparable<Student> { ;
         gnomeSort(students);
 
 
-        System.out.println("Sorted students: ");
+        System.out.println("Sorted students by ID: ");
         for(Student student  : students){
             System.out.println(student.ID);
         }

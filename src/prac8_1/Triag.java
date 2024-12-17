@@ -1,4 +1,7 @@
 package prac8_1;
+
+
+//1 zadanie
 public class Triag {
     public static void recursion(int n, int currentNumber, int count){
         if (n == 0){

@@ -1,4 +1,4 @@
-package prac24.task2.Interfaces;
+package prac24.task2;
 
 
 

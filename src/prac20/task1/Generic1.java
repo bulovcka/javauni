@@ -1,6 +1,6 @@
-package prac21.task1;
+package prac20.task1;
 
-public class Generic1<T, V, K> {
+public class Generic1<T , V, K> {
     private T t;
     private V v;
     private K k;
@@ -35,14 +35,14 @@ public class Generic1<T, V, K> {
         this.k = k;
     }
 
-    public void display(){
-        System.out.println("Class of T " + t.getClass().getName());
-        System.out.println("Class of V " + v.getClass().getName());
-        System.out.println("Class of K " + k.getClass().getName());
+    public void display() {
+        System.out.println("Class of T: " + t.getClass().getName());
+        System.out.println("Class of V: " + v.getClass().getName());
+        System.out.println("Class of K: " + k.getClass().getName());
     }
-    public static void main(String[] args){
-        Generic1<String, Integer, Double> g1 = new Generic1<String, Integer, Double>("T", 13, 2.45);
-        g1.display();
 
+    public static void main(String[] args) {
+        Generic1<Integer, String, Double> myObject = new Generic1<>(42, "Hello, World!", 3.14);
+        myObject.display();
     }
 }

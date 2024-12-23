@@ -20,14 +20,10 @@ public class CalculatorFrame extends JFrame {
         // дисплей
         display = new JTextArea(2, 20);
         display.setEditable(false);
-        display.setFont(new Font("Arial", Font.BOLD, 24));
-        display.setBackground(Color.darkGray);
-        display.setForeground(Color.WHITE);
         add(display, BorderLayout.NORTH);
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(5, 4, 10, 10));
-        buttonPanel.setBackground(Color.darkGray);
         add(buttonPanel, BorderLayout.CENTER);
 
         String[] buttons = {
@@ -40,9 +36,6 @@ public class CalculatorFrame extends JFrame {
 
         for (String text : buttons) {
             JButton button = new JButton(text);
-            button.setFont(new Font("Arial", Font.BOLD, 18));
-            button.setBackground(Color.pink);
-            button.setForeground(Color.white);
             button.addActionListener(new ButtonClickListener());
             buttonPanel.add(button);
         }

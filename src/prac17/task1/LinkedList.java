@@ -17,7 +17,6 @@ public class LinkedList {
         current.next = newNode;
     }
 
-    //найти максимум и переместить
     public void moveMaxToFront() {
         if (head == null || head.next == null) {
             return;

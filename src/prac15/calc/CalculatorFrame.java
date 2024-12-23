@@ -10,6 +10,7 @@ public class CalculatorFrame extends JFrame {
     private String currentInput = "";
     private double firstOperand = 0;
     private String operator = "";
+    private boolean isResultDisplayed = false;
 
     public CalculatorFrame() {
         setTitle("Calculator");
@@ -22,62 +23,80 @@ public class CalculatorFrame extends JFrame {
         add(display, BorderLayout.NORTH);
 
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(4, 4, 10, 10));
+        buttonPanel.setLayout(new GridLayout(5, 4, 10, 10));
         add(buttonPanel, BorderLayout.CENTER);
 
         String[] buttons = {
                 "7", "8", "9", "/",
                 "4", "5", "6", "*",
                 "1", "2", "3", "-",
-                "0", ".", "=", "+"
+                "0", ".", "=", "+",
+                "C"
         };
 
         for (String text : buttons) {
             JButton button = new JButton(text);
-            button.setFont(new Font("Arial", Font.BOLD, 18));
             button.addActionListener(new ButtonClickListener());
             buttonPanel.add(button);
         }
         setVisible(true);
     }
 
-    //ActionListener
     private class ButtonClickListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             String command = e.getActionCommand();
 
             if ("0123456789.".contains(command)) {
+                if (isResultDisplayed) {
+                    currentInput = "";
+                    isResultDisplayed = false;
+                }
                 if (command.equals(".")) {
                     if (currentInput.contains(".")) {
-                        return;  // dots check
+                        return; // Prevent multiple dots
                     }
-                }
-                if (command.equals("0") && currentInput.equals("0")) {
-                    return;  // 0 check
                 }
                 currentInput += command;
                 display.setText(currentInput);
+
             } else if ("/*-+".contains(command)) {
                 if (!currentInput.isEmpty()) {
-                    firstOperand = Double.parseDouble(currentInput);
+                    if (!operator.isEmpty()) {
+                        firstOperand = calculate(firstOperand, Double.parseDouble(currentInput), operator);
+                        display.setText(String.valueOf(firstOperand));
+                    } else {
+                        firstOperand = Double.parseDouble(currentInput);
+                    }
+                    operator = command;
+                    currentInput = "";
+                    isResultDisplayed = false;
+                } else if (!operator.isEmpty()) {
+                    operator = command; // Allow changing operator without entering second operand
                 }
-                operator = command;
-                currentInput = "";
-            } else if ("=".equals(command)) {
 
+            } else if ("=".equals(command)) {
                 if (!currentInput.isEmpty() && !operator.isEmpty()) {
                     double secondOperand = Double.parseDouble(currentInput);
                     double result = calculate(firstOperand, secondOperand, operator);
-                    display.setText(String.valueOf(result));
-                    if (result == Double.MAX_VALUE) { // div 0
+
+                    if (result == Double.MAX_VALUE) {
                         display.setText("Hello World!");
+                        currentInput = ""; // Clear invalid input
                     } else {
                         display.setText(String.valueOf(result));
+                        currentInput = String.valueOf(result);
+                        firstOperand = result;
+                        isResultDisplayed = true;
                     }
-                    currentInput = "";
                     operator = "";
                 }
+            } else if ("C".equals(command)) {
+                currentInput = "";
+                firstOperand = 0;
+                operator = "";
+                display.setText("");
+                isResultDisplayed = false;
             }
         }
 
@@ -91,10 +110,7 @@ public class CalculatorFrame extends JFrame {
                     return a * b;
                 case "/":
                     if (b != 0) return a / b;
-                    else {
-                        display.setText("DIVISION BY ZERO");
-                        return Double.MAX_VALUE;
-                    }
+                    else return Double.MAX_VALUE;
                 default:
                     return 0;
             }

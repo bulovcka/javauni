@@ -1,6 +1,5 @@
 package prac17.task4;
 
-// zadanie 9
 
 public class Main {
     public static void main(String[] args) {
